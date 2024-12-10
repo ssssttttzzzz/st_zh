@@ -5,6 +5,11 @@ from io import BytesIO
 def process_files(file1_path, file2_path, county_col_1, zhibiao_col_1, new_index_col_2):
     df1 = pd.read_excel(file1_path)
     df2 = pd.read_excel(file2_path)
+
+    # Adjust column indices for Python's 0-based indexing
+    county_col_1 -= 1
+    zhibiao_col_1 -= 1
+    new_index_col_2 -= 1
     
     if county_col_1 >= df1.shape[1] or zhibiao_col_1 >= df1.shape[1]:
         st.error("文件1的列索引超出范围。")
@@ -26,13 +31,13 @@ st.title("县市匹配")
 # Inputs for File 1
 st.header("文件1")
 file1_upload = st.file_uploader("上传文件1", type='xlsx')
-county_col_1 = st.number_input("县名列 (0-based):", min_value=0, step=1)
-zhibiao_col_1 = st.number_input("指标列 (0-based):", min_value=0, step=1)
+county_col_1 = st.number_input("县名列 (从1开始):", min_value=1, step=1)
+zhibiao_col_1 = st.number_input("指标列 (从1开始):", min_value=1, step=1)
 
 # Inputs for File 2
 st.header("文件2")
 file2_upload = st.file_uploader("上传文件2", type='xlsx')
-new_index_col_2 = st.number_input("传入列 (0-based):", min_value=0, step=1)
+new_index_col_2 = st.number_input("传入列 (从1开始):", min_value=1, step=1)
 
 # Process Button
 if st.button("开始"):
