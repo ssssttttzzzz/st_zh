@@ -26,6 +26,7 @@ def process_files(file1_path, file2_path, county_col_1, zhibiao_col_1, new_index
     st.success("数据处理完成并已更新文件。")
     return df2
 
+st.set_page_config(page_title="县域匹配")
 st.title("县市匹配")
 
 # Inputs for File 1
